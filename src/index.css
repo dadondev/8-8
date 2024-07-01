@@ -6,3 +6,10 @@
     @apply max-w-6xl mx-auto pl-3;
   }
 }
+
+.container {
+  max-width: 1300px;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}

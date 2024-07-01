@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Form, useActionData } from "react-router-dom";
+import { Form, Link, useActionData } from "react-router-dom";
 import { FormInput } from "../components";
 
 import { useRegister } from "../hooks/useRegister";
@@ -34,10 +34,10 @@ function Register() {
 
       <div className="h-full bg-slate-50 grid place-items-center lg:bg-none bg-[url('https://picsum.photos/1600/2400')] bg-center bg-cover bg-no-repeat bg-fixed">
         <div
-          className="card bg-base-100 w-96 shadow-xl p-8"
+          className="card bg-base-100 w-96 shadow-xl px-8 py-4"
           style={{ backgroundColor: "rgba(255, 255, 255, 0.75)" }}
         >
-          <Form method="post" className="flex flex-col items-center gap-5 ">
+          <Form method="post" className="flex flex-col items-center gap-3">
             <h1 className="text-3xl font-semibold">Register</h1>
             <FormInput type="text" label="displayName" name="displayName" />
             <FormInput type="url" label="photoURL" name="photoURL" />
@@ -55,9 +55,12 @@ function Register() {
             </div>
           </Form>
           <div className="w-full mt-5">
-            <button className="btn btn-accent btn-block text-red-500 text-lg">
-              GOOGLE
+            <button className="btn btn-disabled btn-block text-white">
+              Google
             </button>
+          </div>
+          <div className="text-center mt-3">
+            Do you already have an <Link className="text-black underline" to="/login">account </Link> ?
           </div>
         </div>
       </div>

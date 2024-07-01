@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Form, useActionData } from "react-router-dom";
+import { Form, Link, useActionData } from "react-router-dom";
 import { FormInput } from "../components";
 import { useLogin } from "../hooks/useLogin";
 
@@ -34,7 +34,10 @@ function Login() {
             </div>
           </Form>
           <div className="w-full mt-5">
-            <button className="btn btn-secondary btn-block">Google</button>
+            <button className="btn btn-disabled btn-block">Google</button>
+          </div>
+          <div className="text-center mt-3">
+            I haven't any <Link className="text-black underline" to="/register">account </Link>
           </div>
         </div>
       </div>
