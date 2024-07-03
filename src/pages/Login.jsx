@@ -1,7 +1,13 @@
-import React, { useEffect } from "react";
+// useEffect
+import { useEffect } from "react";
 import { Form, Link, useActionData } from "react-router-dom";
+
+// components
 import { FormInput } from "../components";
+
+// hook
 import { useLogin } from "../hooks/useLogin";
+import { useRegister } from "../hooks/useRegister";
 
 export const action = async ({ request }) => {
   let formData = await request.formData();
@@ -12,7 +18,8 @@ export const action = async ({ request }) => {
 
 function Login() {
   const userData = useActionData();
-  const { loginUser, isPending } = useLogin();
+  const { loginUser, isPending, } = useLogin();
+  const { isPending: isPendingUseRegister, registerWithGoogle } = useRegister();
 
   useEffect(() => {
     if (userData) {
@@ -33,11 +40,18 @@ function Login() {
               <button className="btn btn-primary btn-block">Login</button>
             </div>
           </Form>
-          <div className="w-full mt-5">
-            <button className="btn btn-disabled btn-block">Google</button>
-          </div>
+          {isPendingUseRegister && <div className="w-full mt-5">
+            <button disabled onClick={registerWithGoogle} className="btn btn-accent btn-block text-white">
+              <span className="loading loading-dots loading-sm"></span>
+            </button>
+          </div>}
+          {!isPendingUseRegister && <div className="w-full mt-5">
+            <button onClick={registerWithGoogle} className="btn btn-accent btn-block text-white">
+              Google{" "}
+            </button>
+          </div>}
           <div className="text-center mt-3">
-            I haven't any <Link className="text-black underline" to="/register">account </Link>
+            If you don't have account, <Link className="text-black underline" to="/register">Register</Link>
           </div>
         </div>
       </div>
