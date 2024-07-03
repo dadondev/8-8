@@ -1,6 +1,25 @@
-import React from "react";
+// toast
+import { toast } from "react-hot-toast";
+
+// firebase
+import { auth } from "../firebase/firebaseConfig"
+import { signOut } from "firebase/auth";
+
+// redux
+import { useDispatch } from "react-redux";
+import { logout } from "../app/userSlice";
 
 function Navbar() {
+  const dispatch = useDispatch()
+  const logOutProfile = async () => {
+    try {
+      await signOut(auth);
+      toast.success("See you soon");
+      dispatch(logout())
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
   return (
     <div className="container">
       <header className="bg-base-200 ">
@@ -34,36 +53,9 @@ function Navbar() {
             <a className="btn btn-ghost text-xl">Ashraf | Todos App</a>
           </div>
           <div className="navbar-end">
-            <button className="btn btn-ghost btn-circle">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </button>
-            <button className="btn btn-ghost btn-circle">
-              <div className="indicator">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                </svg>
-                <span className="badge badge-xs badge-primary indicator-item"></span>
-              </div>
+            <button onClick={logOutProfile} className="btn flex items-center btn-error text-white btn-md ">
+              Log out
+              <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14 20H6C4.89543 20 4 19.1046 4 18L4 6C4 4.89543 4.89543 4 6 4H14M10 12H21M21 12L18 15M21 12L18 9" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
             </button>
           </div>
         </div>

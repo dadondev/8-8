@@ -16,7 +16,7 @@ export const action = async ({ request }) => {
 
 function Register() {
   const userData = useActionData();
-  const { register, isPending } = useRegister();
+  const { register, isPending, registerWithGoogle } = useRegister();
 
   useEffect(() => {
     if (userData) {
@@ -54,13 +54,18 @@ function Register() {
               )}
             </div>
           </Form>
-          <div className="w-full mt-5">
-            <button className="btn btn-disabled btn-block text-white">
-              Google
+          {isPending && <div className="w-full mt-5">
+            <button disabled onClick={registerWithGoogle} className="btn btn-accent btn-block text-white">
+              Loading...
             </button>
-          </div>
+          </div>}
+          {!isPending && <div className="w-full mt-5">
+            <button onClick={registerWithGoogle} className="btn btn-accent btn-block text-white">
+              Google{" "}
+            </button>
+          </div>}
           <div className="text-center mt-3">
-            Do you already have an <Link className="text-black underline" to="/login">account </Link> ?
+            If you have account, <Link className="text-black underline" to="/login">Login</Link>
           </div>
         </div>
       </div>

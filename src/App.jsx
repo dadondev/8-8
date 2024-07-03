@@ -12,16 +12,26 @@ import { Home, Login, Register } from "./pages";
 //layouts
 import MainLayout from "./layouts/MainLayout";
 
-//redux
+// components
 import { ProtectedRoutes } from "./components";
-import { useSelector } from "react-redux";
+
+//redux
+import { useSelector, useDispatch } from "react-redux";
+import { login, isAuthChange } from "./app/userSlice";
 
 // actions
 import { action as LoginAction } from "./pages/Login";
 import { action as RegisterAction } from "./pages/Register";
+import { useEffect } from "react";
+import { action as HomeAction } from "./pages/Home"
+
+// firebase
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase/firebaseConfig";
 
 function App() {
-  const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const { user, isAuthState } = useSelector((state) => state.user);
 
   const routes = createBrowserRouter([
     {
@@ -35,6 +45,7 @@ function App() {
         {
           index: true,
           element: <Home />,
+          action: HomeAction,
         },
       ],
     },
@@ -49,7 +60,16 @@ function App() {
       action: RegisterAction,
     },
   ]);
-  return <RouterProvider router={routes} />;
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      dispatch(login(user));
+      dispatch(isAuthChange());
+    });
+  }, []);
+
+  return <> {isAuthState && <RouterProvider router={routes} />}
+  </>
 }
 
 export default App;

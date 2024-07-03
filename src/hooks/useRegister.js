@@ -1,11 +1,20 @@
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-
+// firebase
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 import { auth } from "../firebase/firebaseConfig";
+
+// usestate
 import { useState } from "react";
 
+// redux
 import { login } from "../app/userSlice";
 import { useDispatch } from "react-redux";
 
+// toast
 import toast from "react-hot-toast";
 
 export const useRegister = () => {
@@ -37,5 +46,22 @@ export const useRegister = () => {
     }
   };
 
-  return { isPending, register };
+  const registerWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+
+    setIspending(true);
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      toast.success(`Welcome, ${user.displayName}`);
+      dispatch(login(user));
+      setIspending(false)
+    } catch (error) {
+      const errorMessage = error.message;
+      toast.error(errorMessage);
+      setIspending(false)
+    }
+  };
+
+  return { isPending, registerWithGoogle, register };
 };
