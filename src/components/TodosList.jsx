@@ -30,21 +30,25 @@ function TodosList({ data }) {
 
     return (
         <>
-            <h1 className="text-2xl font-semibold">Todo List</h1>
+            <h1 className="text-2xl font-semibold md:text-start text-center mb-6">Todo List</h1>
+            <hr className="w-11/12" />
             {data &&
                 data.map((todo) => {
                     return (
                         <div className={`${todo.completed ? "opacity-40" : "opacity-100"}`} key={todo.id}>
-                            <h3>{todo.title}</h3>
+                            <h3 className="text-xl font-medium">{todo.title}</h3>
                             <div className="flex gap-5 items-center">
                                 <button onClick={() => changeStatus(todo.id, todo.completed)} className="btn btn-accent btn-sm text-white">{todo.completed ? 'uncompleted' : 'completed'}</button>
                                 <button onClick={() => deleteTodo(todo.id)} className="btn btn-circle">
                                     <img src="./delete.svg" alt="" className="h-8 w-8" />
                                 </button>
                             </div>
+                            <hr className="w-11/12 mt-3" />
                         </div>
+
                     );
                 })}
+
         </>
     )
 

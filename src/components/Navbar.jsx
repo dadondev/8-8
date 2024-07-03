@@ -49,7 +49,7 @@ function Navbar() {
               </ul>
             </div>
           </div>
-          <div className="navbar-center">
+          <div className="navbar-center md:block hidden">
             <a className="btn btn-ghost text-xl">Ashraf | Todos App</a>
           </div>
           <div className="navbar-end">
