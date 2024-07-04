@@ -42,7 +42,7 @@ function Login() {
           </Form>
           {isPendingUseRegister && <div className="w-full mt-5">
             <button disabled onClick={registerWithGoogle} className="btn btn-accent btn-block text-white">
-              <span className="loading loading-dots loading-sm"></span>
+              <span className="loading loading-spinner loading-sm"></span>
             </button>
           </div>}
           {!isPendingUseRegister && <div className="w-full mt-5">
