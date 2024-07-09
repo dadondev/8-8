@@ -5,6 +5,9 @@ import { Form, Link, useActionData } from "react-router-dom";
 // components
 import { FormInput } from "../components";
 
+// backgroun video
+import BgVideo from "../videos/kitchen-bg-vid2.mp4"
+
 // hook
 import { useLogin } from "../hooks/useLogin";
 import { useRegister } from "../hooks/useRegister";
@@ -28,10 +31,10 @@ function Login() {
   }, [userData]);
 
   return (
-    <div className="grid grid-cols-1  lg:grid-cols-2 min-h-screen">
-      <div className="hidden lg:block h-full bg-orange-50 bg-[url('https://picsum.photos/800/1200')] bg-center bg-cover"></div>
-      <div className="h-full  bg-slate-50 bg-[url('https://picsum.photos/800/1200')] lg:bg-none bg-cover grid place-items-center">
-        <div className="card bg-base-100 w-96 shadow-xl  p-8">
+    <div className="h-screen grid place-items-center top-0">
+      <video className="w-full h-screen object-cover absolute " src={BgVideo} autoPlay loop muted />
+      <div className="h-full lg:bg-none bg-cover grid place-items-center">
+        <div className="card bg-[#ffffffb7] w-96 shadow-xl  p-8">
           <Form method="post" className="flex flex-col items-center gap-5">
             <h1 className="text-3xl font-semibold">Login</h1>
             <FormInput type="email" label="email" name="email" />
