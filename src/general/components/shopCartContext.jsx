@@ -12,15 +12,13 @@ import ShopCartBtn from "./shopCartBtn";
 import { Minus, Plus } from "lucide-react";
 import dataSlice from "../../redux/dataSlice";
 import { useState } from "react";
+import UZSum from "../../functions/currency";
 
 const ShopCartContext = () => {
     const [count, setCount] = useState(0)
     const dispatch = useDispatch()
-  let UZSum = new Intl.NumberFormat("uz-UZ", {
-    style: "currency",
-    currency: "UZS",
-  });
-  const datas = useSelector((state) => state.selectedDatas);
+
+  const datas = useSelector((state) => state.dataSlice.selectedDatas);
   return (
     <Menubar>
       <MenubarMenu>

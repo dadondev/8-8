@@ -5,8 +5,8 @@ import { useSelector } from "react-redux";
 import ShopCartContext from "./shopCartContext";
 
 const Actions = ({ type }) => {
-  const allDatas = useSelector((e) => e.allDatas);
-  const likedDatas = useSelector((s) => s.likedDatas);
+  const allDatas = useSelector((e) => e.dataSlice.allDatas);
+  const likedDatas = useSelector((s) => s.dataSlice.likedDatas);
   return (
     <ul
       className={

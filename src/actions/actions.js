@@ -6,8 +6,14 @@ export async function getAllProducts(setValue, range) {
     const db = getDatabase()
     const starRef = ref(db, range);
     onValue(starRef, (snaps) => {
-        const datas = snaps.val()
-        setValue(Object.values(datas))
+        const datas = snaps.val();
+        if(datas.products){
+            setValue(Object.values(datas))
+            console.log(Object.values(datas));
+        }else{
+            setValue(datas)
+        }
+       
     })
 }
 
